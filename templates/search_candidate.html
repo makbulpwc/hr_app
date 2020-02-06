@@ -1,0 +1,123 @@
+<html>
+<head>
+<body>
+
+  <style type='text/css'>
+  body {background-color:white}
+  
+  caption {
+    text-align: center;
+    font-size: 160%;
+    letter-spacing: 0px;
+    font-weight: bold;
+} 
+
+
+h1 {
+    border: 3px solid black;
+    border-radius: 10px;    
+    height: 95px;
+    font-size: 35px;
+    line-height: 90px; 
+    font-weight: bold;
+    text-align: center;
+    padding-right: 200px;   
+    
+}
+
+img {
+  border-radius: 200px;
+  margin-left: 4px;
+  margin-bottom: 5px;
+  margin-top: 3px;
+
+}
+
+
+  </style>
+
+<script type="text/javascript">
+
+function checkinput()
+{
+
+  var input_value = document.getElementById('FirstName').value;
+
+  if(input_value == "" || input_value == null)
+  {
+
+    alert('Please Enter Candidate Phone No or FirstName')
+    return false;
+
+  }
+  else
+  {
+
+    return true;
+
+  }
+
+
+}
+
+
+</script>
+  
+
+  
+<div> <img src="../static/pwclogo.png" alt="pwc logo" width="130" height="85" align="left" /> <h1> Search for candidates </h1> </div>
+<br>
+
+<form action="http://localhost:5000/search_candidate_info"  enctype = "multipart/form-data" method="POST" onsubmit="checkinput()">
+  <p align=center>  <label>  <b> Name or Phone No: </b> </label>  <input type="text" name="FirstName" id="FirstName"> 
+
+  <input type="submit" value="Search" > </p>
+
+
+</form>
+
+<br>
+<br>
+
+
+
+
+
+<table align=center style="width:100%" border="1px solid black">
+    <caption> Candidate Detials</caption>
+ 
+    <tr>
+      <th>FirstName</th>
+      <th>Last Name </th>
+      <th> Phone No </th>
+      <th>Current Stage  </th>
+      <th> New Stage </th>
+      <th> Interview Date / Entry Date </th>
+      
+      <th> Update </th>
+
+      {% if name == "NO RESULTS FOUND" %}
+
+      <h2 align=center style="color:#ff0000"> {{ name }} </h2>
+    {% else %}
+      
+    </tr>
+    
+        {% for row in name %}
+            <tr align=center>
+            {% for d in row %}
+             <td >  {{ d }}  </td>
+             
+            {% endfor %}
+            <td>  <a href = "{{ url_for('enterdetails',pno=row[2]) }}" > Update  </a> </td> 
+        </tr>
+        {% endfor %}
+    
+  </table>
+
+  {% endif %}
+
+
+</body>
+</head>
+</html>

@@ -1,0 +1,139 @@
+<html>
+<head>
+
+  <style>
+
+    body {background-color:white}
+
+
+    h1 {
+    border: 3px solid black;
+    border-radius: 10px;    
+    height: 95px;
+    font-size: 35px;
+    line-height: 90px; 
+    font-weight: bold;
+    text-align: center;
+    padding-right: 200px;   
+    
+}
+
+img {
+  border-radius: 200px;
+  margin-left: 4px;
+  margin-bottom: 5px;
+  margin-top: 3px;
+
+}
+
+
+.success {
+  
+  border: none;
+  color:black;
+  padding: 15px 18px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin-left: 80px;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 2px solid black;
+  background-color:rgb(231,230,230);
+
+
+}
+
+
+input[type="submit"] {
+  width: 300px;
+  margin-left: 80px;
+
+}
+
+button{
+
+display: inline-block;
+width: 200px;
+align:center;  
+margin-left: 100px;
+
+}
+
+a:link, a:visited {
+  border: none;
+  color:black;
+  padding: 15px 18px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin-left: 80px;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 2px solid black;
+  background-color:rgb(231,230,230);
+  width:250px
+}
+
+
+    </style>
+
+</head>
+
+<div> <img src="../static/pwclogo.png" alt="pwc logo" width="130" height="85" align="left" /> <h1> HR Candidate Upload Data </h1> </div>
+
+    <br/>
+    
+    <h3 align=center> Please upload the file in below Format and Do not include any Headers in XLS or XLSX file  </h3>
+    <br />
+
+    <table align=center  border=1 width="100%">
+        <tr align=center>
+
+          <th>Firstname</th>
+          <th>Lastname</th> 
+          <th>Phone No</th>
+          
+        </tr>
+
+        <tr align=center>
+          <td>abc</td>
+          <td>xyz</td>
+          <td>123456789</td>
+          
+        </tr>
+        
+      </table>
+      
+      <br />
+      <br>
+
+   <body align=center>
+      <form action = "http://localhost:5000/uploader" method = "POST" 
+         enctype = "multipart/form-data">
+           
+         <input type = "file" class='btn success' name = "file" />
+         <br />
+         <br />
+         <br />
+         <input  type = "submit"  class='btn success' value="Upload data"/>
+         <br>
+         <br>
+         <br>
+         <a href = "{{ url_for('search_candidates') }}" > Search Candidates  </a>
+        
+        </form>
+
+
+        <br />
+        <br>
+
+        {% if uploaded %}
+
+        <h1 align=center> File Uploaded Successfully </h1>
+        {% endif %}
+
+   </body>
+</html>

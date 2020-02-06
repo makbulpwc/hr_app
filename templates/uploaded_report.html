@@ -1,0 +1,126 @@
+<html>
+<head>
+  <style>
+
+    body {background-color:white}
+    
+    h1 {
+    border: 3px solid black;
+    border-radius: 10px;    
+    height: 95px;
+    font-size: 35px;
+    line-height: 90px; 
+    font-weight: bold;
+    text-align: center;
+    padding-right: 200px;   
+    
+}
+
+img {
+  border-radius: 200px;
+  margin-left: 4px;
+  margin-bottom: 5px;
+  margin-top: 3px;
+
+}
+
+  </style>  
+
+
+<body>
+
+
+  
+<div> <img src="../static/pwclogo.png" alt="pwc logo" width="130" height="85" align="left" /> <h1> Candidate Status Details </h1> </div>
+
+
+<div align='center'>
+
+  <table align=center style="width:50%" border="1px solid black">
+  <caption> <b> Pending Counts </b> </caption>
+  
+  <tr align=center>
+            
+    <th> Sl.No </th>  
+    <th>Department</th> </th>
+    <th> Counts </th>
+    </tr>
+  
+  {% for row in counts_ofdept %}  
+  
+  <tr align=center>
+
+     <td> {{loop.index }} </td>
+
+       <!-- <td> <a href = "{{ url_for('count_details',deptname=row[0]) }}" >  {{j}}  </a> </td>  -->
+      <td> {{ row[0] }}  </td>
+      <td> <a href = "{{ url_for('upload_report',deptname=row[0]) }}" >  {{ row[1] }} </a> </td>
+     
+  </tr>
+
+  {% endfor %}
+  
+  
+    
+<tr align=center>
+ 
+
+  <td></td>
+  <td> Total </td>
+
+  <td> <a href = "{{ url_for('upload_report',deptname='all') }}" >   {{ total  }} </a> </td>
+
+  
+</tr>
+
+
+  </table>
+
+</div>
+
+<br>
+<br>
+
+
+    <table align=center style="width:100%" border="1px solid black">
+        
+        <tr align=center>
+            
+          <th> Sl.No </th>  
+          <th>FirstName</th> </th>
+          <th>Last Name </th>
+          <th> Phone No </th>
+          <th>  InterView Date </th>
+          
+          <th> Updated Date </th>
+          <th> Days  So Far </th>
+          <th> Days In </th>
+          
+          
+            
+          {% for row in data %}
+          <tr align=center>
+            <td> {{loop.index }} </td>
+           
+            {% for j in row %}
+          
+              
+            {% for d in j %}
+  
+             <td> {{ d }}   </td>
+             
+            {% endfor %}
+            
+        
+        </tr>
+        {% endfor %}
+        {% endfor %}
+
+      </table>
+    
+
+
+
+</body>
+</head>
+</html>

@@ -1,0 +1,259 @@
+<html>
+<head>
+    <style>
+
+    body {background-color: white;}
+
+    label{
+    display: inline-block;
+    float: center;
+    clear: center;
+    width: 100px;
+    text-align: right;
+}
+input {
+  display: inline-block;
+  float: center;
+  width:130px;
+
+}    
+
+
+
+
+h1 {
+    border: 3px solid black;
+    border-radius: 10px;    
+    height: 95px;
+    font-size: 35px;
+    line-height: 90px; 
+    font-weight: bold;
+    text-align: center;
+    padding-right: 200px;   
+    
+}
+
+img {
+  border-radius: 200px;
+  margin-left: 4px;
+  margin-bottom: 5px;
+  margin-top: 3px;
+
+}
+
+.success {
+  
+  border: none;
+  color:black;
+  padding: 15px 18px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin-left: 80px;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 2px solid black;
+  background-color:rgb(231,230,230);
+
+
+}
+
+
+input[type="submit"] {
+  width: 200px;
+  margin-left: 80px;
+
+}
+
+
+a:link, a:visited {
+  border: none;
+  color:black;
+  padding: 15px 18px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin-left: 80px;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 2px solid black;
+  background-color:rgb(231,230,230);
+  width:150px
+}
+
+
+button{
+
+display: inline-block;
+width: 200px;
+align:center;  
+margin-left: 100px;
+
+}
+
+
+    </style>
+
+</head>    
+
+<body align=center>
+
+    <script type="text/javascript">
+
+        function myFunction()
+        {
+
+            var selected_option = document.getElementById('currentstatus').value;
+
+            if(selected_option == "Technical Interview" || "manager round" || "HR compensation round" || "Benchmarking" || "Headroom" || "Offer rollout" || "offer accepted" || "to be onboarded" || "joined / drop out")
+            {
+                  document.getElementById("hidden_div").style.display = "block"; 
+            
+            }
+            else
+            {
+               document.getElementById("hidden_div").style.display = "hide"; 
+            }
+        }
+
+
+        function newStatus()
+        {
+            var selected_option = document.getElementById('newstatus').value;
+
+            if(selected_option == "Technical Interview" || "manager round" || "HR compensation round" || "Benchmarking" || "Headroom" || "Offer rollout" || "offer accepted" || "to be onboarded" || "joined / drop out")
+            {
+                document.getElementById("hidden_div_stage").style.display = "block"; 
+
+            }
+            else
+            {
+            document.getElementById("hidden_div_stage").style.display = "hide"; 
+            }
+
+
+        }
+
+    </script>   
+
+
+
+<div> <img src="../static/pwclogo.png" alt="pwc logo" width="130" height="85" align="left" /> <h1> PWC HIRING PROCESS </h1> </div>
+
+
+<h3> Enter Candidate Details </h3>    
+<form action="/enterdetails"  enctype = "multipart/form-data" method="POST">
+
+<div align='center'>
+
+
+    <label> Competancy: </label>   
+
+    <select id="competancyname" name="competancyname" onchange="competancy(this)">
+        
+        <option label="DA">D&A</option>
+        <option label="SAP">SAP</option>
+        <option label="Apptech">Apptech</option>
+        <option label="ITFT"> ITFT </option>
+        <option label="MSD"> MSD </option>
+    </select>
+    <br><br/>
+       <label>  Location: </label>
+       <select id="location_select" name="location_select" onchange="location(this)">
+        
+        <option label="Bangalore">Bangalore</option>
+        <option label="Noida">Noida</option>
+        
+    </select>
+
+    <br>
+    <br>
+
+    {%if candidate_info %}
+
+    {% for details in candidate_info %}
+
+    <label> First name: </label>  <input type="text" name="FirstName" value={{details[0]}} readonly> 
+    <br><br/>
+       <label>  Last name: </label> <input type="text" name="LastName" value = {{details[1]}} readonly><br><br>
+    <label> Phone No:</label> <input  id="phone" name="phone" maxlength="10" pattern="[1-9]{1}[0-9]{9}" value={{details[2]}} readonly> <br><br>
+
+
+    {% endfor %}
+    {% endif %}
+
+    <label> Interview Date:</label> <input type="date" name="idate"><br><br>
+
+    <label> Current Stage: </label>
+    <select id="currentstatus" name = "currentstatus" onchange="myFunction(this)">
+        
+        <option label="Technical Interview"> Technical Interview </option>
+        <option label="manager round">Manager Round</option>
+        <option label="HR compensation round">HR compensation round</option>
+        <option label="Benchmarking">Benchmarking</option>
+        <option label="Headroom"> Headroom </option>
+        <option label="Offer rollout">Offer rollout </option>
+        <option label="offer accepted">offer accepted</option>
+        <option label="to be onboarded"> to be onboarded </option>
+        <option label="joined / drop out"> joined / drop out </option>
+        
+     
+    </select>
+
+      <br>
+
+    <div id="hidden_div" style="display:none;">
+    
+        <input type="radio" name="cstatus" value="selected" checked>Selected
+        <input type="radio" name="cstatus" value="rejected">Rejected <br>
+    
+    </div>
+    <br>
+      <label> New Stage: </label> 
+      <select id="newstatus" name="newstatus" onchange="newStatus(this)">
+        
+    
+        <option label="Technical Interview"> Technical Interview </option>
+        <option label="manager round">Manager Round</option>
+        <option label="HR compensation round">HR compensation round</option>
+        <option label="Benchmarking">Benchmarking</option>
+        <option label="Headroom"> Headroom </option>
+        <option label="Offer rollout">Offer rollout </option>
+        <option label="offer accepted">offer accepted</option>
+        <option label="to be onboarded"> to be onboarded </option>
+        <option label="joined / drop out"> joined / drop out </option>
+        <option label="Closed"> Closed </option>
+        
+    </select>
+    <br>
+
+    <div id="hidden_div_stage" style="display:none;">
+    
+        <input type="radio" name="nstatus" value="selected" checked>Selected
+        <input type="radio" name="nstatus" value="rejected">Rejected <br>
+    
+    </div>
+
+        <br>      
+        <br>
+    
+    <!-- <label> Upload Resume: </label> <input type = "file" name = "file" /><br><br> -->
+
+  
+    <input type="submit" class='btn success' value="Submit">
+    <br>
+    <br>
+    <a href = "{{ url_for('upload_report') }}" > View Report  </a>
+
+</div>
+
+</form>
+
+</body>
+
+</head>
+
+
+</html>
